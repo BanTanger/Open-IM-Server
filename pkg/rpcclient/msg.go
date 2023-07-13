@@ -277,3 +277,16 @@ func (m *Message) GetAllUserID(ctx context.Context, req *user.GetAllUserIDReq) (
 	}
 	return resp, nil
 }
+
+func (m *Message) GetAllUserID(ctx context.Context, req *user.GetAllUserIDReq) (*user.GetAllUserIDResp, error) {
+	conn, err := m.discov.GetConn(context.Background(), config.Config.RpcRegisterName.OpenImMsgName)
+	if err != nil {
+		panic(err)
+	}
+	client := user.NewUserClient(conn)
+	resp, err := client.GetAllUserID(ctx, req)
+	if err != nil {
+		return nil, err
+	}
+	return resp, nil
+}
