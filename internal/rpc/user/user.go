@@ -234,7 +234,7 @@ func (s *userServer) GetGlobalRecvMessageOpt(ctx context.Context, req *pbuser.Ge
 }
 
 func (s *userServer) GetAllUserID(ctx context.Context, req *pbuser.GetAllUserIDReq) (resp *pbuser.GetAllUserIDResp, err error) {
-	userIDs, err := s.UserDatabase.GetAllUserID(ctx)
+	userIDs, err := s.UserDatabase.GetAllUserID(ctx, req.Pagination.PageNumber, req.Pagination.ShowNumber)
 	if err != nil {
 		return nil, err
 	}
