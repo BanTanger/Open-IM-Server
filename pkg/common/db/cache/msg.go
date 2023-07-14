@@ -212,6 +212,7 @@ func (c *msgCache) GetMaxSeqs(ctx context.Context, conversationIDs []string) (m 
 func (c *msgCache) GetMaxSeq(ctx context.Context, conversationID string) (int64, error) {
 	return c.getSeq(ctx, conversationID, c.getMaxSeqKey)
 }
+
 func (c *msgCache) SetMinSeq(ctx context.Context, conversationID string, minSeq int64) error {
 	return c.setSeq(ctx, conversationID, minSeq, c.getMinSeqKey)
 }
@@ -235,6 +236,7 @@ func (c *msgCache) SetMinSeqs(ctx context.Context, seqs map[string]int64) error 
 func (c *msgCache) GetMinSeqs(ctx context.Context, conversationIDs []string) (map[string]int64, error) {
 	return c.getSeqs(ctx, conversationIDs, c.getMinSeqKey)
 }
+
 func (c *msgCache) GetMinSeq(ctx context.Context, conversationID string) (int64, error) {
 	return c.getSeq(ctx, conversationID, c.getMinSeqKey)
 }

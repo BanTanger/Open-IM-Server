@@ -83,6 +83,7 @@ func (m *msgServer) sendMsgSuperGroupChat(
 	resp.ClientMsgID = req.MsgData.ClientMsgID
 	return resp, nil
 }
+
 func (m *msgServer) setConversationAtInfo(nctx context.Context, msg *sdkws.MsgData) {
 	log.ZDebug(nctx, "setConversationAtInfo", "msg", msg)
 	ctx := mcontext.NewCtx("@@@" + mcontext.GetOperationID(nctx))
@@ -122,7 +123,6 @@ func (m *msgServer) setConversationAtInfo(nctx context.Context, msg *sdkws.MsgDa
 			log.ZWarn(ctx, "SetConversations", err, msg.AtUserIDList, conversation)
 		}
 	}
-
 }
 
 func (m *msgServer) sendMsgNotification(

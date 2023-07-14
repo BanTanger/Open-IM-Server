@@ -17,19 +17,22 @@ package group
 import (
 	"context"
 	"fmt"
-	pbConversation "github.com/OpenIMSDK/Open-IM-Server/pkg/proto/conversation"
-	"github.com/OpenIMSDK/Open-IM-Server/pkg/proto/wrapperspb"
 	"math/big"
 	"math/rand"
 	"strconv"
 	"strings"
 	"time"
 
+	pbConversation "github.com/OpenIMSDK/Open-IM-Server/pkg/proto/conversation"
+	"github.com/OpenIMSDK/Open-IM-Server/pkg/proto/wrapperspb"
+
 	"github.com/OpenIMSDK/Open-IM-Server/pkg/rpcclient/notification"
 
 	"github.com/OpenIMSDK/Open-IM-Server/pkg/common/convert"
 	"github.com/OpenIMSDK/Open-IM-Server/pkg/common/mw/specialerror"
 	"github.com/OpenIMSDK/Open-IM-Server/pkg/rpcclient"
+
+	"google.golang.org/grpc"
 
 	"github.com/OpenIMSDK/Open-IM-Server/pkg/common/constant"
 	"github.com/OpenIMSDK/Open-IM-Server/pkg/common/db/cache"
@@ -45,7 +48,6 @@ import (
 	pbGroup "github.com/OpenIMSDK/Open-IM-Server/pkg/proto/group"
 	"github.com/OpenIMSDK/Open-IM-Server/pkg/proto/sdkws"
 	"github.com/OpenIMSDK/Open-IM-Server/pkg/utils"
-	"google.golang.org/grpc"
 )
 
 func Start(client discoveryregistry.SvcDiscoveryRegistry, server *grpc.Server) error {
@@ -900,7 +902,6 @@ func (s *groupServer) SetGroupInfo(ctx context.Context, req *pbGroup.SetGroupInf
 		}()
 		num++
 		s.Notification.GroupInfoSetAnnouncementNotification(ctx, &sdkws.GroupInfoSetAnnouncementTips{Group: tips.Group, OpUser: tips.OpUser})
-
 	}
 	switch len(data) - num {
 	case 0:
